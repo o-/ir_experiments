@@ -68,10 +68,12 @@ void Arg::print(std::ostream& o, std::vector<Node*>& done) {
     return;
   Node::print(o, done);
 
-  id(o);
-  o << " -> ";
-  e->id(o);
-  o << " [style=dotted];\n";
+  if (e) {
+    id(o);
+    o << " -> ";
+    e->id(o);
+    o << " [style=dotted];\n";
+  }
 }
 
 void Env::print(std::ostream& o) {

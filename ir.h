@@ -194,6 +194,7 @@ class Arg : public Node {
 
   virtual Node* bind(Env* e, std::vector<Node*> a) {
     if (e == this->e) {
+      e->references--;
       assert(i < a.size());
       assert(val_in.empty() || val_in[0] == a[i]);
       val_in.resize(1);
@@ -206,7 +207,6 @@ class Arg : public Node {
     if (val_in.empty())
       return this;
     assert(val_in.size() == 1);
-    e->references--;
     return val_in[0];
   }
 

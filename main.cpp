@@ -28,7 +28,7 @@ void optimize(Node* c, int steam) {
 
 int main() {
   {
-    // (function(a) a + 1)(2)
+    // (function(a) a + 1)(2 + 1)
 
     Env* e = new Env("e");
 
@@ -37,11 +37,12 @@ int main() {
 
     Node* fun = new Fun(body, e);
 
-    std::vector<Node*> args = {new Constant(2)};
+    std::vector<Node*> args = {
+      new Add(new Constant(2), new Constant(1))};
 
     Node* c = new Call(fun, args);
 
-    optimize(c, 2);
+    optimize(c, 3);
   }
 
   {

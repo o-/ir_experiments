@@ -69,6 +69,7 @@ void Arg::print(std::ostream& o, std::vector<Node*>& done) {
   Node::print(o, done);
 
   if (e) {
+    e->print(o);
     id(o);
     o << " -> ";
     e->id(o);

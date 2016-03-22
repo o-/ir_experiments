@@ -63,6 +63,8 @@ class Node {
       syntax_in[i] = opt(syntax_in[i]);
   }
 
+  // Optimizations:
+
   virtual Node* deprom() {
     foreachValue([](Node* i) { return i->deprom(); });
     return this;
@@ -192,9 +194,10 @@ class Arg : public Node {
   }
   void label(std::ostream& o) { o << "a_" << i; }
 
-  virtual Node* bind(Env* e, std::vector<Node*> a) {
-    if (e == this->e) {
+  virtual Node* bind(Env* e_in, std::vector<Node*> a) {
+    if (e_in == e) {
       e->references--;
+      e = nullptr;
       assert(i < a.size());
       assert(val_in.empty() || val_in[0] == a[i]);
       val_in.resize(1);

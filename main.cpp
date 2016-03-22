@@ -8,13 +8,13 @@ void optimize(Node* c, int steam) {
 
     c->printGraph(std::cout, "cfold");
 
-    c = c->activate();
-
-    c->printGraph(std::cout, "activate");
-
     c = c->deprom();
 
     c->printGraph(std::cout, "deprom");
+
+    c = c->activate();
+
+    c->printGraph(std::cout, "activate");
 
     c = c->loadElim();
 
@@ -59,7 +59,7 @@ int main() {
     Node* c = new Call(
         new Call(outerFun, {new Constant(1)}), {});
 
-    optimize(c, 3);
+    optimize(c, 2);
   }
 
   {
